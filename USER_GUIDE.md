@@ -28,8 +28,8 @@ python3 -m venv .venv
 ```
 
 Alternatively, install a wheel with
-`python -m pip install /path/to/spherepackgen-0.2.0-py3-none-any.whl`.
-Installation downloads dependencies; Anaconda is not required.
+`python -m pip install /path/to/spherepackgen-1.0.0-py3-none-any.whl`.
+Installation downloads the required dependencies.
 
 The commands above do not require environment activation. For the shorter
 `spherepackgen` commands below, activate the environment with
@@ -71,9 +71,7 @@ available without it.
 | `imported_distribution` | Sample from a particle-size file through YAML/API |
 
 The GUI offers monodisperse, quasi-monodisperse and continuous polydisperse
-sizes. Its crystal option requires monodisperse particles. SHU, external
-RCPGenerator, generic hyperuniform, quasicrystal and custom correlation
-generation are not available.
+sizes. Its crystal option uses monodisperse particles.
 
 ## 3. Configure physical dimensions and density
 
@@ -175,8 +173,8 @@ physical:
 For independent sphere centers, the model relates covered fraction `c` and
 nominal fraction `eta` by `eta = -ln(1 - c)`. Nominal fraction is the summed
 sphere volume divided by box volume; it may exceed 1 because overlaps count
-multiple times. The reported `1 - exp(-eta)` is expected coverage, not a
-measurement of the union volume of the finite generated sample.
+multiple times. The reported `1 - exp(-eta)` is the model's expected coverage.
+Use this definition when choosing the target and interpreting metadata.
 
 ## 4. Configure particle sizes
 
@@ -239,9 +237,9 @@ the first numeric column. File paths are resolved relative to the YAML file.
 
 The file supplies a size population to sample from. Sampling uses replacement
 when the requested number exceeds the number of input rows. The generated
-sample is then normalized to `physical.mean_diameter`; the input rows are not
-a fixed per-particle list, and group counts are not enforced. No material mapping
-is inferred from a column name or size value.
+sample is then normalized to `physical.mean_diameter`. Input values form a
+sampling population, and group counts follow the sampling probabilities.
+Assign materials by the generated sizes in your optical solver.
 
 In the GUI, choose **Continuous distribution → custom_file**, upload the file
 and choose whether its values represent diameters or radii.
@@ -260,9 +258,9 @@ size_distribution:
       number_fraction: 0.5
 ```
 
-The factors specify relative sizes. Number fractions are sampling probabilities,
-not exact quotas. All sampled radii are normalized together to the requested
-mean diameter. These settings specify geometry, not optical materials.
+The factors specify relative sizes. Number fractions specify sampling
+probabilities. All sampled radii are normalized together to the requested
+mean diameter. Assign optical materials after generating the geometry.
 
 ## 5. Select a generator
 
@@ -301,8 +299,9 @@ LS automatic initialization selects a force-biased warm start at
 [LS example](configs/examples/lubachevsky_stillinger.yaml) for complete settings.
 
 Higher density or broader particle sizes can require more time and tuning.
-Neither force-biased relaxation nor LS output alone proves equilibrium,
-random close packing or maximally random jamming.
+Use generator diagnostics and structural statistics to assess the resulting
+packing. Evaluate equilibrium, isotropy or jamming with the additional analyses
+required by your application.
 
 ### Crystals
 
@@ -336,11 +335,12 @@ For fixed boxes, use complete, unstrained cells. A three-element
 `unit_cells: [nx, ny, nz]` can specify the tiling, but each cell must have
 the same side length and the resulting density must match the target.
 The GUI's **Apply compatible crystal dimensions** button computes compatible
-length/depth from your chosen cell counts. Fixed-box HCP is rejected.
+length/depth from your chosen cell counts. For HCP, use automatically resolved
+cubic dimensions.
 
 Maximum non-overlapping lattice fractions are approximately SC 0.5236,
 BCC 0.6802, FCC/HCP 0.7405 and diamond cubic 0.3401. Changing a random seed
-does not change a deterministic crystal.
+leaves the deterministic crystal placement unchanged.
 
 ## 6. Operate the GUI
 
@@ -362,8 +362,8 @@ directory, and only files listed in that run's manifest are displayed.
 
 Quick, Standard and Detailed `S(k)` presets use maximum reciprocal indices
 5, 10 and 20. Increasing this index increases computation substantially.
-Disabling plots does not disable analysis; the `Compute g2(r)` and
-`Compute S(k)` controls do that separately.
+Analysis and plotting have separate controls. Use `Compute g2(r)` and
+`Compute S(k)` to select the calculations.
 
 The GUI defaults to CSV/JSON, enabled plots and one perspective packing view.
 HDF5 is optional. Preview images use at most 1,000 particles and label the
@@ -388,7 +388,8 @@ recorded readiness flags or permit failed geometry validation.
 
 `tolerance_phi` is an absolute dimensionless fraction tolerance.
 `tolerance_overlap` is a length tolerance in internal dimensionless units.
-Increasing a tolerance does not fix invalid geometry.
+Choose tolerances for the required geometric accuracy, and correct invalid
+inputs or overlaps before using the structure.
 
 | File | Contents |
 |---|---|
@@ -411,8 +412,9 @@ Increasing a tolerance does not fix invalid geometry.
 Coordinate CSV columns are
 `particle_id,x,y,z,radius,diameter,species_id,material_id`.
 Use exported diameters rather than assuming every sphere equals the mean.
-The label fields do not provide refractive indices or a material database;
-generated material IDs default to zero.
+The label fields identify particles, species and materials; generated material
+IDs default to zero. Assign refractive indices and other optical properties
+in the simulation software.
 
 Metadata records box lengths in dimensionless units and meters. HDF5 geometry,
 `g2` distances and nearest-neighbor distances use internal lengths; `S(k)`
@@ -463,18 +465,17 @@ remain dimensionless until you convert them.
 
 Import `particles_real_units.csv` and the dimensions from `metadata.json`.
 Create each sphere at `(x, y, z)` using its `radius`. Assign materials and
-optical properties in your solver, including any size-based material mapping.
-Custom-file input does not perform this assignment.
+optical properties in your solver, including any size-based material mapping
+for custom particle-size inputs.
 
 A periodic sphere may cross a box face. Represent the periodic images or
-appropriate clipping in your solver; do not discard it merely because its
-surface extends outside the cell. The generated depth direction is also
+appropriate clipping in your solver so that the crossing sphere remains
+represented in the periodic cell. The generated depth direction is also
 periodic. If you model a finite slab with open entrance/exit faces, construct
 that slab and its boundaries explicitly and check the resulting interfaces.
 
-Geometry validity and structural statistics do not establish an optical
-response. Set mesh resolution, illumination, wavelength and boundaries in
-your optical solver and check numerical convergence there.
+Calculate optical responses in your electromagnetic solver. Set mesh resolution,
+illumination, wavelength and boundaries, then check numerical convergence.
 
 ## 10. Troubleshooting
 

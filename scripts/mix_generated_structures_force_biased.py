@@ -537,7 +537,7 @@ def generate_force_biased_rect(
         "status": status,
         "elapsed_time_s": float(time.perf_counter() - start),
         "note": (
-            "Independent rectangular-periodic adaptation of SpherePackGen's P0 force_biased "
+            "Rectangular-periodic adaptation of SpherePackGen's force_biased "
             "dense generator: reduced-radius placement, staged radius growth, outer-shell "
             "repulsive relaxation, and outer diameter ratio contraction."
         ),

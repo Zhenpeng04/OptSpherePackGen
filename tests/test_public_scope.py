@@ -16,5 +16,5 @@ def test_retired_structure_is_rejected(value):
 def test_retired_algorithm_is_rejected(name, tmp_path):
     config = config_from_mapping({"physical": {"mean_diameter": "200 nm", "packing_fraction": .1},
                                   "algorithm": {"name": name}}, tmp_path)
-    with pytest.raises(NotImplementedError, match="not available in this release"):
+    with pytest.raises(NotImplementedError, match="Unknown generator"):
         get_generator(config)

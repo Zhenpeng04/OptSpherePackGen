@@ -15,11 +15,11 @@ OptSpherePackGen 提供 `spherepackgen` Python 软件包，用于生成、验证
 | 允许重叠的随机介质 | 球心独立分布的标记泊松布尔球模型 |
 | 粒径分布 | 单分散、准单分散、对数正态、截断正态、均匀、Gamma、Weibull、自定义粒径文件及离散混合 |
 
-GUI 提供主要粒径分布和结构选项。离散混合、导入分布及 Metropolis 采样通过 YAML 或 Python API 配置。本版本不包含 SHU 和外部 RCPGenerator。
+GUI 提供主要粒径分布和结构选项。离散混合、导入分布及 Metropolis 采样通过 YAML 或 Python API 配置。
 
 ## 安装与启动
 
-支持 Windows、macOS 和 Linux，需要 **Python 3.10 或以上版本**。下载或克隆仓库后，在项目目录打开终端。安装过程需要下载依赖，无需 Anaconda。
+支持 Windows、macOS 和 Linux，需要 **Python 3.10 或以上版本**。下载或克隆仓库后，在项目目录打开终端。安装过程需要下载依赖。
 
 Windows PowerShell：
 
@@ -42,7 +42,7 @@ python3 -m venv .venv
 也可以安装提供的 wheel 文件：
 
 ```text
-python -m pip install /path/to/spherepackgen-0.2.0-py3-none-any.whl
+python -m pip install /path/to/spherepackgen-1.0.0-py3-none-any.whl
 ```
 
 ## 生成第一个结构
@@ -123,9 +123,9 @@ particles = load_snapshot(bundle.config.output.path)
 
 - 三个坐标轴均为周期边界，包括深度方向。固定盒满足 `Lx = Ly = length`、`Lz = depth`，表示重复介质。
 - 固定尺寸保持不变。粒子数必须为整数，因此目标与实际体积分数可能存在小幅差异，软件会报告该差异。
-- 晶体需要完整且未受应变的晶胞。GUI 可按晶胞数应用兼容尺寸；固定盒不支持 HCP。
-- 重叠介质的覆盖体积分数与球体积求和得到的名义体积分数不同。报告的布尔覆盖率是模型期望值，并非球并集体积的实测结果。
-- 接近堵塞密度时，收敛取决于分布、算法和计算预算。通过几何验证不能单独证明各向同性、平衡态或最大随机堵塞。
+- 晶体需要完整且未受应变的晶胞。GUI 可按晶胞数应用兼容尺寸。HCP 使用自动确定尺寸的立方盒。
+- 重叠介质的名义体积分数由各微球体积求和得到，布尔覆盖率表示期望占据比例。元数据记录这两个量。
+- 接近堵塞密度时，收敛取决于分布、算法和计算预算。请结合生成器诊断和结构统计评估仿真所需结构。
 - 三维预览最多显示 1,000 个粒子；坐标导出和验证使用完整结构。
 
 CLI 退出码 0 表示几何有效且生成器状态成功。退出码 1、2、3 分别表示输入或生成错误、验证失败、需要进一步检查的有效候选。自动化工作流使用 `--allow-candidate` 前，请阅读用户指南。

@@ -66,7 +66,7 @@ def _fixed_box_radii(config: PackingConfig, lengths: np.ndarray, rng, max_partic
         params = config.algorithm.parameters
         lattice = LatticeType.from_value(params.get("lattice_type", "FCC"))
         if lattice == LatticeType.HCP:
-            raise ValueError("Fixed rectangular HCP boxes are not supported; use a legacy cubic configuration.")
+            raise ValueError("For HCP, use a periodic_cube configuration with automatically resolved dimensions.")
         if config.structure.size_distribution != SizeDistributionClass.MONODISPERSE:
             raise ValueError("Fixed-box crystals require monodisperse particles.")
         basis = lattice_basis_count(lattice)
@@ -156,7 +156,7 @@ def resolve_parameters(config: PackingConfig, max_particles=None) -> ResolvedPar
     n_particles = config.particles.num_particles or _crystal_n_from_unit_cells(config) or _auto_particle_count(config, rng)
     if n_particles is None:
         raise ValueError(
-            "P0 requires either physical.medium_thickness, particles.num_particles, "
+            "Specify physical.medium_thickness, particles.num_particles, "
             "algorithm.parameters.unit_cells, or domain.box_size."
         )
 

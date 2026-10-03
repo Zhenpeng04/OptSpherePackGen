@@ -21,14 +21,13 @@ interface, YAML configuration or Python API.
 
 The GUI provides the main size distributions and structure choices. Discrete
 mixtures, imported distributions and the Metropolis sampling route are
-configured through YAML or the Python API. SHU and external RCPGenerator
-are not included.
+configured through YAML or the Python API.
 
 ## Install and start
 
 Use **Python 3.10 or newer** on Windows, macOS or Linux. Download or clone the
 repository and open a terminal in its directory. Installation downloads the
-required dependencies; Anaconda is not required.
+required dependencies.
 
 Windows PowerShell:
 
@@ -54,7 +53,7 @@ continue using the full executable paths above.
 You can also install a supplied wheel:
 
 ```text
-python -m pip install /path/to/spherepackgen-0.2.0-py3-none-any.whl
+python -m pip install /path/to/spherepackgen-1.0.0-py3-none-any.whl
 ```
 
 ## Generate your first structure
@@ -156,13 +155,12 @@ Use the snapshot when you need the original coordinates exactly.
 - Fixed dimensions are preserved. Integer particle counts can produce a small,
   reported difference between requested and actual volume fractions.
 - Crystals require complete, unstrained unit cells. The GUI can apply compatible
-  dimensions; fixed-box HCP is not supported.
-- For overlapping media, covered fraction and summed sphere volume fraction
-  are different quantities. Reported Boolean coverage is a model expectation,
-  rather than a measured union volume.
+  dimensions. Use automatically resolved cubic dimensions for HCP.
+- For overlapping media, nominal fraction sums individual sphere volumes;
+  Boolean coverage describes the expected occupied fraction. Metadata records
+  both quantities.
 - Near-jamming convergence depends on the distribution, algorithm and budget.
-  Valid geometry alone does not establish isotropy, equilibrium or maximally
-  random jamming.
+  Review generator diagnostics and structural statistics for your simulation.
 - Three-dimensional preview images display at most 1,000 particles. Coordinate
   exports and validation use the complete structure.
 

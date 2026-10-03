@@ -59,7 +59,7 @@ def cmd_run(args) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="spherepackgen", description="SpherePackGen P0 CLI")
+    parser = argparse.ArgumentParser(prog="spherepackgen", description="Microsphere geometry for optical simulation")
     sub = parser.add_subparsers(dest="command", required=True)
     run = sub.add_parser("run", help="Run a generation config")
     run.add_argument("config", help="YAML configuration file")

@@ -1,4 +1,4 @@
-"""Streamlit prototype GUI for SpherePackGen."""
+"""Streamlit graphical interface for OptSpherePackGen."""
 
 from __future__ import annotations
 
@@ -487,7 +487,7 @@ def _preflight_checks(
 
     if spatial_order == "periodic_crystal" and "lateral_length_um" in data:
         if str(data.get("lattice_type", "FCC")).upper() == "HCP":
-            errors.append("Fixed-box HCP is not supported; use a legacy cubic configuration.")
+            errors.append("For HCP, use a periodic_cube configuration with automatically resolved dimensions.")
         if particle_estimate_error and "Crystal dimensions" in particle_estimate_error:
             errors.append(particle_estimate_error)
     if particle_estimate_error:

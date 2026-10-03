@@ -1,4 +1,4 @@
-"""SpherePackGen P0 public API."""
+"""OptSpherePackGen public Python API."""
 
 from spherepackgen.api import load_config, run_generation, load_snapshot
 from spherepackgen.domain.particles import ParticleSet

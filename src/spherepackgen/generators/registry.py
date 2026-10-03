@@ -59,5 +59,6 @@ def get_generator(config: PackingConfig):
     if name == "default":
         name = default_generator_name(config)
     if name not in GENERATORS:
-        raise NotImplementedError(f"Generator {name!r} is not available in this release")
+        choices = "crystal, marked_poisson_boolean, poisson_disk, rsa, force_biased, lubachevsky_stillinger, metropolis"
+        raise NotImplementedError(f"Unknown generator {name!r}. Choose one of: {choices}.")
     return GENERATORS[name]

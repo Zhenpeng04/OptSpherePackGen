@@ -1,4 +1,4 @@
-"""Radius sampling for P0."""
+"""Particle radius sampling and normalization."""
 
 from __future__ import annotations
 

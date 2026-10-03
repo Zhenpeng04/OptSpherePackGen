@@ -1,4 +1,4 @@
-"""P0 structural descriptors."""
+"""Structural descriptors for periodic microsphere geometry."""
 
 from __future__ import annotations
 

@@ -1,2 +1,1 @@
-"""Graphical user interface prototypes."""
-
+"""Local graphical user interface."""

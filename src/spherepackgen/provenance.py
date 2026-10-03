@@ -79,7 +79,7 @@ def environment_provenance() -> dict:
     try:
         package_version = version("spherepackgen")
     except PackageNotFoundError:
-        package_version = "0.2.0"
+        package_version = "1.0.0"
     commit, dirty = None, None
     root = package.parent.parent
     if (root / ".git").exists():

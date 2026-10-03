@@ -456,9 +456,8 @@ class ForceBiasedGenerator:
             status=status,
             diagnostics={
                 "note": (
-                    "P0 force-biased dense generator: variable-radius Poisson-disk initialization, "
-                    "staged radius growth, outer-shell repulsive forces, and outer diameter ratio contraction. "
-                    "Not a rigorous LS or RCP proof."
+                    "Force-biased dense generator: variable-radius Poisson-disk initialization, "
+                    "staged radius growth, outer-shell repulsive forces, and outer diameter ratio contraction."
                 ),
                 "reference_model": "simplified Bezrukov/Jodrey-Tory-style force-biased relaxation",
                 "initialization": "poisson_disk_small_radii",
