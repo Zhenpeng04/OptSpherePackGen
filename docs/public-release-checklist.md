@@ -16,6 +16,11 @@ downstream user's responsibility, including assignment by size for custom files.
 
 ## Validation gates
 
+The final local source suite passes 173 tests on Windows. The installed wheel
+passes CLI, snapshot/replay, localhost server and GUI generation/download/history
+checks outside the checkout. Wheel and source archives exclude the removed
+implementations and all private working files.
+
 Run `python -m pytest` on the final source tree. Build both wheel and source
 distribution using `python -m build` in a clean build directory. Install the wheel
 in a separate environment and run `python scripts/check_installed_package.py`.

@@ -27,7 +27,9 @@ def check():
     # Streamlit's Windows file watcher may retain a directory handle briefly.
     # Cleanup failures must not replace a meaningful smoke-test diagnostic.
     with TemporaryDirectory(prefix="spherepackgen-installed-", ignore_cleanup_errors=True) as temporary:
-        root = Path(temporary)
+        # macOS resolves /var to /private/var; Windows runners may use an 8.3
+        # temporary-directory alias. Compare canonical workspace paths.
+        root = Path(temporary).resolve()
         environment = os.environ.copy()
         environment.pop("PYTHONPATH", None)
         environment["SPHEREPACKGEN_WORKSPACE"] = str(root)

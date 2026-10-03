@@ -70,5 +70,6 @@ there. Generated evidence/results are ignored by Git.
 This verification covers representative cases, not every density or aspect
 ratio. Near-jamming convergence remains algorithm-dependent. Linux/macOS process
 handling is implemented but was not exercised on this Windows host. Remote
-multi-platform CI has not been run. Actual custom-file browser upload was not
+multi-platform CI results for the public release are available in GitHub Actions.
+Actual custom-file browser upload was not
 part of this acceptance run; its parser/backend regression coverage remains.
