@@ -1,0 +1,45 @@
+project:
+  name: p0_fcc_test
+  description: FCC crystal reference structure.
+
+structure:
+  size_distribution: monodisperse
+  spatial_order: periodic_crystal
+
+physical:
+  mean_diameter: 0.2 um
+  packing_fraction: 0.7
+  medium_thickness: 1.2 um
+
+domain:
+  type: periodic_cube
+
+particles:
+  num_particles: auto
+
+size_distribution:
+  type: monodisperse
+
+algorithm:
+  name: default
+  parameters:
+    lattice_type: FCC
+
+analysis:
+  compute_g2: true
+  compute_Sk: true
+  bins: 80
+  k_max_index: 5
+
+validation:
+  tolerance_phi: 1.0e-8
+  tolerance_overlap: 1.0e-5
+
+output:
+  path: results/p0_fcc_test
+  coordinate_unit: um
+  formats: [csv, json]
+
+runtime:
+  random_seed: 12345
+  log_level: info

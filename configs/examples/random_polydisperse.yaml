@@ -1,0 +1,49 @@
+project:
+  name: p0_random_polydisperse
+  description: Hard-core random packing with a continuous polydisperse particle-size distribution.
+
+structure:
+  size_distribution: continuous_polydisperse
+  spatial_order: hard_core_random
+
+physical:
+  mean_diameter: 0.3 um
+  packing_fraction: 0.20
+  medium_thickness: 2.4 um
+
+domain:
+  type: periodic_cube
+
+particles:
+  num_particles: auto
+
+size_distribution:
+  type: continuous_polydisperse
+  distribution: lognormal
+  CV_radius: 0.20
+  min_radius_factor: 0.40
+  max_radius_factor: 1.80
+
+algorithm:
+  name: default
+  parameters:
+    max_attempts_per_particle: 10000
+
+analysis:
+  compute_g2: true
+  compute_Sk: true
+  bins: 80
+  k_max_index: 5
+
+validation:
+  tolerance_phi: 1.0e-8
+  tolerance_overlap: 1.0e-5
+
+output:
+  path: results/p0_random_polydisperse
+  coordinate_unit: um
+  formats: [csv, json]
+
+runtime:
+  random_seed: 20260530
+  log_level: info

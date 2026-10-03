@@ -1,0 +1,25 @@
+project:
+  name: rectangular_random
+structure:
+  size_distribution: monodisperse
+  spatial_order: hard_core_random
+physical:
+  mean_diameter: 200 nm
+  packing_fraction: 0.50
+domain:
+  type: periodic_box
+  length: 2 um
+  depth: 1 um
+particles:
+  num_particles: auto
+algorithm:
+  name: default
+analysis:
+  compute_g2: true
+  compute_Sk: true
+output:
+  path: results/rectangular_random
+  formats: [csv, json]
+  make_plots: true
+runtime:
+  random_seed: 12345

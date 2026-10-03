@@ -1,0 +1,48 @@
+project:
+  name: p0_overlapping_random_boolean
+  description: Marked Poisson Boolean model with polydisperse overlapping spheres.
+
+structure:
+  size_distribution: continuous_polydisperse
+  spatial_order: overlapping_random
+
+physical:
+  mean_diameter: 0.3 um
+  covered_volume_fraction: 0.70
+  medium_thickness: 2.0 um
+
+domain:
+  type: periodic_cube
+
+particles:
+  num_particles: auto
+
+size_distribution:
+  type: continuous_polydisperse
+  distribution: lognormal
+  CV_radius: 0.20
+  min_radius_factor: 0.40
+  max_radius_factor: 1.80
+
+algorithm:
+  name: default
+
+analysis:
+  compute_g2: true
+  compute_Sk: true
+  bins: 80
+  k_max_index: 5
+
+validation:
+  tolerance_phi: 1.0e-8
+  tolerance_overlap: 1.0e-5
+  require_non_overlap: false
+
+output:
+  path: results/p0_overlapping_random_boolean
+  coordinate_unit: um
+  formats: [csv, json]
+
+runtime:
+  random_seed: 20260530
+  log_level: info

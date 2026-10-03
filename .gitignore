@@ -1,0 +1,38 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Local editor, assistant, and scratch state.
+.agents/
+.codex/
+.codex_tmp/
+.conda/
+.git-local/
+.vscode/
+.spherepackgen/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated run outputs. Keep example configs under version control, regenerate results as needed.
+results/
+
+# Local planning/source documents are kept outside the first public source release.
+Documents/
+
+# Local third-party binaries kept for private experiments.
+vendor/
+
+# Local document-render scratch folders.
+.doc_render_*/
+.codex_doc_extract/
+.codex_doc_work/

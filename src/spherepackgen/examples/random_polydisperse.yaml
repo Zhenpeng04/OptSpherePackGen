@@ -1,0 +1,27 @@
+project:
+  name: polydisperse_example
+structure:
+  size_distribution: continuous_polydisperse
+  spatial_order: hard_core_random
+physical:
+  mean_diameter: 300 nm
+  packing_fraction: 0.15
+domain:
+  type: periodic_box
+  length: 2 um
+  depth: 1 um
+particles:
+  num_particles: auto
+size_distribution:
+  type: continuous_polydisperse
+  distribution: lognormal
+  CV_radius: 0.15
+algorithm:
+  name: default
+analysis:
+  k_max_index: 3
+output:
+  path: results/polydisperse_example
+  make_plots: true
+runtime:
+  random_seed: 12345

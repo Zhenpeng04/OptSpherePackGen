@@ -1,0 +1,46 @@
+project:
+  name: monodisperse_150nm_phi050_3um
+  description: Monodisperse hard-core packing, 150 nm diameter, 3 um thickness, volume fraction 0.50.
+
+structure:
+  size_distribution: monodisperse
+  spatial_order: hard_core_random
+
+physical:
+  mean_diameter: 0.15 um
+  packing_fraction: 0.50
+  medium_thickness: 3.0 um
+
+domain:
+  type: periodic_cube
+
+particles:
+  num_particles: auto
+
+size_distribution:
+  type: monodisperse
+
+algorithm:
+  name: default
+  parameters:
+    max_attempts_per_particle: 10000
+
+analysis:
+  compute_g2: false
+  compute_Sk: false
+  bins: 80
+  k_max_index: 5
+
+validation:
+  tolerance_phi: 1.0e-8
+  tolerance_overlap: 1.0e-5
+
+output:
+  path: results/monodisperse_150nm_phi050_3um
+  coordinate_unit: um
+  formats: [csv, json]
+  make_plots: false
+
+runtime:
+  random_seed: 20260630
+  log_level: info

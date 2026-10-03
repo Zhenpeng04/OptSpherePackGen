@@ -1,0 +1,5 @@
+include USER_GUIDE.md CHANGELOG.md CONTRIBUTING.md
+recursive-include configs *.yaml
+recursive-include docs *.md
+recursive-include scripts *.py
+recursive-include tests *.py

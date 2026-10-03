@@ -1,0 +1,23 @@
+project:
+  name: rectangular_example
+structure:
+  size_distribution: monodisperse
+  spatial_order: hard_core_random
+physical:
+  mean_diameter: 200 nm
+  packing_fraction: 0.50
+domain:
+  type: periodic_box
+  length: 2 um
+  depth: 1 um
+particles:
+  num_particles: auto
+algorithm:
+  name: default
+analysis:
+  k_max_index: 3
+output:
+  path: results/rectangular_example
+  make_plots: true
+runtime:
+  random_seed: 12345

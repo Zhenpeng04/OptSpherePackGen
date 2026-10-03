@@ -1,0 +1,67 @@
+project:
+  name: lubachevsky_stillinger_dynamic_compression
+  description: Native Lubachevsky-Stillinger hard-sphere event-driven dynamic compression example.
+
+structure:
+  size_distribution: quasi_monodisperse
+  spatial_order: hard_core_random
+
+physical:
+  mean_diameter: 0.3 um
+  packing_fraction: 0.32
+  medium_thickness: 1.8 um
+
+domain:
+  type: periodic_cube
+
+particles:
+  num_particles: auto
+
+size_distribution:
+  type: quasi_monodisperse
+  CV_radius: 0.03
+  min_radius_factor: 0.90
+  max_radius_factor: 1.10
+
+algorithm:
+  name: lubachevsky_stillinger
+  parameters:
+    initialization: auto
+    initial_radius_scale: 0.70
+    # For packing_fraction >= 0.60, initialization: auto uses force_biased_warm_start.
+    # Optional high-density tuning:
+    # warm_start_packing_fraction: 0.50
+    # warm_start_stages: 16
+    # warm_start_relaxation_steps_per_stage: 450
+    # warm_start_final_cleanup_steps: 1200
+    compression_rate: 2.0e-2
+    velocity_scale: 1.0
+    max_events: 30000
+    mass_mode: equal
+    event_backend: auto
+    neighbor_skin_fraction: 1.0
+    neighbor_velocity_safety_factor: 2.0
+    neighbor_rebuild_fraction: 0.8
+    max_heap_factor: 8.0
+    max_attempts_per_particle: 30000
+    candidates_per_particle: 30
+    final_cleanup_steps: 200
+
+analysis:
+  compute_g2: true
+  compute_Sk: true
+  bins: 80
+  k_max_index: 5
+
+validation:
+  tolerance_phi: 1.0e-8
+  tolerance_overlap: 1.0e-5
+
+output:
+  path: results/lubachevsky_stillinger_dynamic_compression
+  coordinate_unit: um
+  formats: [csv, json]
+
+runtime:
+  random_seed: 271828
+  log_level: info

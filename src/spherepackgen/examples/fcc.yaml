@@ -1,0 +1,22 @@
+project:
+  name: fcc_example
+structure:
+  size_distribution: monodisperse
+  spatial_order: periodic_crystal
+physical:
+  mean_diameter: 200 nm
+  packing_fraction: 0.50
+algorithm:
+  name: default
+  parameters:
+    lattice_type: FCC
+    unit_cells: 2
+analysis:
+  bins: 40
+  k_max_index: 3
+output:
+  path: results/fcc_example
+  formats: [csv, json]
+  make_plots: true
+runtime:
+  random_seed: 12345
